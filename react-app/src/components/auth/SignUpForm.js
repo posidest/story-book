@@ -1,20 +1,29 @@
 import React, { useState } from "react";
+import {useDispatch, useSelector} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../services/auth';
+import { signUp } from '../../store/session';
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errors, setErrors] = useState([])
+  const dispatch = useDispatch()
+  const me = useSelector((state) => state.session.user)
 
-  const onSignUp = async (e) => {
+
+  const onSignUp = (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = dispatch(signUp(username, email, password));
       if (!user.errors) {
-        setAuthenticated(true);
+        return user;
+      } else {
+        setErrors(user.errors)
       }
+    } else {
+      errors.push('Password must match repeat password.')
     }
   };
 
@@ -34,7 +43,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
     setRepeatPassword(e.target.value);
   };
 
-  if (authenticated) {
+  if (me) {
     return <Redirect to="/" />;
   }
 
