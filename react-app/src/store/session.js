@@ -102,7 +102,10 @@ export const signUp = (user) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         dispatch(setUser(data.user));
-        return res;
+        return data;
+    } else {
+      const data = await res.json()
+      return data;
     }
 }
 
@@ -111,7 +114,7 @@ export default function reducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case SET_USER:
-            newState = { ...state, ['user']: action.payload }
+            newState = { ...state, user: action.payload }
             return newState;
         case REMOVE_USER:
             newState = {};
