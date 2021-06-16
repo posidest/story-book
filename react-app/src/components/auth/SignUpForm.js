@@ -19,7 +19,8 @@ const SignUpForm = () => {
   const onSignUp = (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = dispatch(signUp(username, email, password, avatar, bio));
+      console.log(username, email, avatar, bio)
+      const user = dispatch(signUp({username, email, password, avatar, bio}));
       if (!user.errors) {
         return user;
       } else {
@@ -30,6 +31,10 @@ const SignUpForm = () => {
     }
   };
 
+  if (me) {
+    return <Redirect to="/" />;
+  }
+  
   const updateUsername = (e) => {
     setUsername(e.target.value);
   };
@@ -57,9 +62,6 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (me) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <form onSubmit={onSignUp}>
