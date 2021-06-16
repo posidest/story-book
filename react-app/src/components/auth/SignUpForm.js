@@ -8,6 +8,9 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [avatar, setAvatar] = useState(null)
+  const [image, setImage] = useState(null)
+  const [bio, setBio] = useState("")
   const [errors, setErrors] = useState([])
   const dispatch = useDispatch()
   const me = useSelector((state) => state.session.user)
@@ -16,7 +19,7 @@ const SignUpForm = () => {
   const onSignUp = (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = dispatch(signUp(username, email, password));
+      const user = dispatch(signUp(username, email, password, avatar, bio));
       if (!user.errors) {
         return user;
       } else {
@@ -34,6 +37,17 @@ const SignUpForm = () => {
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
+
+  const updateAvatar = (e) => {
+    let file = e.target.files[0]
+    setAvatar(file)
+    file = URL.createObjectURL(file)
+    setImage(file)
+  }
+
+  const updateBio = (e) => {
+    setBio(e.target.value);
+  }
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
@@ -68,6 +82,24 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
+        <label>Avatar</label>
+        <input
+          type="file"
+          accept="image/*"
+          name="avatar"
+          onChange={updateAvatar}
+        ></input>
+      </div>
+      {image && (
+        <div>
+          <img src={image} alt='avatar'/>
+        </div>
+      )}
+      <div>
+      <div>
+        <label>Bio</label>
+        <textarea onChange={updateBio}/>
+      </div>
         <label>Password</label>
         <input
           type="password"
