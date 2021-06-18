@@ -6,7 +6,7 @@
 // import './Text.css'
 // import TextEditor from '../TextEditor'
 
-// const StepForm = ({stepCount, setStepCount, stepState, setStepState, publish, setPublish, steps, setSteps}) => {
+// const PageText = () => {
    
 //    const dispatch = useDispatch()
 //    const [step, setStep] = useState('')

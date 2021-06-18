@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {createBook} from '../../store/book';
 import './Publish.css'
 
-const Cover = () => {
+const Cover = ({form, setForm}) => {
     const [image, setImage] = useState(null);
     // const [imageLoading, setImageLoading] = useState(false);
     const [cover, setCover] = useState(null)
@@ -23,19 +23,15 @@ const Cover = () => {
     const moveOn = (e) => {
         e.preventDefault()
         const tempId = Math.floor(Math.random() * 1000);
-        dispatch(createBook({tempId, cover, userId: me.id, categoryId, description, keywords}))
+        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, keywords}))
+        const formType = 'page'
+        setForm(formType)
     }
 
     const cancel = (e) => {
         history.push('/library')
         // setProject({...project, 'user_id': userId})
     }
-
-    useEffect(() => {
-        if(book) {
-            
-        }
-    })
 
 
 
@@ -87,9 +83,9 @@ const Cover = () => {
                             />
                         Upload an Image
                         </label>
-                        <div>
+                        {/* <div>
                             <button type="submit">Done</button>
-                        </div>
+                        </div> */}
                         <div className='image'>
                         {image && (
                             <img 
@@ -99,7 +95,7 @@ const Cover = () => {
                         )}   
                         </div>
                     </div>
-                    <div className='projectTitle'>
+                    <div className='bookTitle'>
                         <input 
                         type='text'
                         name='title'
@@ -156,7 +152,7 @@ const Cover = () => {
                     )}
                     </div>
                     <div className='submit-btns'>
-                        <button type='button' onClick={moveOn}>Done! Let's add a page.</button>
+                        <button type='submit'>Done! Let's add a page.</button>
                         <button type='button' onClick={cancel}>Cancel</button>
                     </div>
                 </form>
