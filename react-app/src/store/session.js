@@ -75,7 +75,7 @@ export const signUp = (user) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         dispatch(setUser(data.user));
-        return data;
+        return data.user;
     } else {
       const data = await res.json()
       return data;

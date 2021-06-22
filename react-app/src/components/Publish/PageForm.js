@@ -20,14 +20,14 @@ const PageForm = ({form, setForm}) => {
     const book = useSelector(state => state.book)
     const me = useSelector(state => state.session.user)
     const pages = useSelector(state => state.page.pages)
-    if (book) console.log(book, 'book in page form')
+    // if (book) console.log(book, 'book in page form')
     
-    useEffect(() => {
-        if(pages) {
-            let lastPage = pages[pages.length - 1]
-            setPageNumber(lastPage.page_number)
-        }
-    },[dispatch, pages])
+    // useEffect(() => {
+    //     if(pages) {
+    //         let lastPage = pages[pages.length - 1]
+    //         setPageNumber(lastPage.page_number)
+    //     }
+    // },[dispatch, pages])
 
     const moveOn = async(e) => {
         e.preventDefault()
@@ -60,6 +60,7 @@ const PageForm = ({form, setForm}) => {
         }
         setPageNumber(pageNumber+1)
         setPagePic(null)
+        setImage(null)
         setPageText('')
     }
 

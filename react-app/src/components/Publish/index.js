@@ -13,7 +13,9 @@ const Publish = () => {
    console.log(book, 'book on publish page')
    
    useEffect(() => {
-      console.log(form)
+      if(book.temp_id) {
+         setForm('page')
+      }
    },[form, book, pages])
 
 
@@ -22,7 +24,8 @@ const Publish = () => {
       <Redirect to='/'/>
    )
    
-   if(!book.temp_id || form === 'book') {
+   // if((!book.temp_id && form === 'book') || (book.temp_id && form === 'book')) {
+      if(form === 'book') {
       return (
          <>
          <Cover form={form} setForm={setForm}/>
@@ -30,7 +33,7 @@ const Publish = () => {
       )
    }
 
-   if(book.temp_id && form === 'page') {
+   else if(form === 'page') {
       return (
          <>
             <PageForm form={form} setForm={setForm} setPublish={setPublish}/>
