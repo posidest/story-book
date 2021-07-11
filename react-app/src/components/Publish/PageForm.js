@@ -112,7 +112,7 @@ const PageForm = ({form, setForm}) => {
                 <div className='media-form'>
                     <div className='new-media'>
                         {type === 'image' && (
-                        <form onSubmit={updateImage}>
+                        <form>
                             <div className='upload-photo'>
                                 <label className='file-input'>
                                     <input
@@ -122,7 +122,6 @@ const PageForm = ({form, setForm}) => {
                                     />
                                     Upload Image
                                 </label>
-                                <button type="submit">Done</button>
                                 <div>
                                     <img 
                                     src={image}

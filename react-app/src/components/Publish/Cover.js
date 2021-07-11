@@ -23,7 +23,7 @@ const Cover = ({form, setForm}) => {
     const moveOn = (e) => {
         e.preventDefault()
         const tempId = Math.floor(Math.random() * 1000);
-        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, keywords}))
+        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, keywords, image}))
         const formType = 'page'
         setForm(formType)
     }
@@ -33,7 +33,15 @@ const Cover = ({form, setForm}) => {
         // setProject({...project, 'user_id': userId})
     }
 
-
+    useEffect(() => {
+        if(book) {
+            setCover(book.cover)
+            setTitle(book.title)
+            setCategoryId(book.category_id)
+            setKeywords(book.keywords)
+            setDescription(book.description)
+        }
+    },[])
 
     // const uploadImage = async (e) => {
     //     e.preventDefault();
@@ -128,28 +136,28 @@ const Cover = ({form, setForm}) => {
                     <label>Add Keywords</label>
                     <div className='keyword'>
                         <input type='text'
-                        // value={keywords}
-                        onChange={(e) => setKeywords([e.target.value])} />
+                        value={keywords}
+                        onChange={(e) => keywords.push(e.target.value)} />
                     </div>
                     <div>
                         <input type='text'
-                        // value={keywords}
-                        onChange={(e) => setKeywords([...keywords, e.target.value])} />
+                        value={keywords}
+                        onChange={(e) => keywords.push(e.target.value)} />
                     </div>
-                    {keywords.length >= 2  && (
+                    {/* {keywords.length >= 2  && (
                         <div>
                         <input type='text'
-                        // value={keywords}
-                        onChange={(e) => setKeywords([...keywords, e.target.value])} />
+                        value={keywords}
+                        onChange={(e) => keywords.push(e.target.value)}  />
                         </div>
                     )}
                     {keywords.length >= 3 && (
                         <div>
                         <input type='text'
-                        //   value={keywords}
-                            onChange={(e) => setKeywords([...keywords, e.target.value])} />
+                          value={keywords}
+                            onChange={(e) => keywords.push(e.target.value)}  />
                         </div>
-                    )}
+                    )} */}
                     </div>
                     <div className='submit-btns'>
                         <button type='submit'>Done! Let's add a page.</button>

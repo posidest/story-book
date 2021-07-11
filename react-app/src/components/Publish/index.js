@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import Cover from './Cover';
 import PageForm from './PageForm';
+import PublishForm from './PublishForm';
 
 const Publish = () => {
    const [form, setForm] = useState('book')
@@ -24,8 +25,7 @@ const Publish = () => {
       <Redirect to='/'/>
    )
    
-   // if((!book.temp_id && form === 'book') || (book.temp_id && form === 'book')) {
-      if(form === 'book') {
+   if(form === 'book') {
       return (
          <>
          <Cover form={form} setForm={setForm}/>
@@ -39,7 +39,15 @@ const Publish = () => {
             <PageForm form={form} setForm={setForm} setPublish={setPublish}/>
          </>
       )
-   } else {
+   } else if(publish) {
+      return (
+         <>
+         <PublishForm/>
+         </>
+      )
+   }
+   
+   else {
       return (
          <h1>What is happening?</h1>
       )

@@ -29,7 +29,7 @@ const removeBook = (book) => ({
 
 
 export const createBook = (book) => async (dispatch) => {
-    const { temp_id, user_id, title, category_id, keywords, cover, description } = book;
+    const { temp_id, user_id, title, category_id, keywords, cover, description, image} = book;
     const res = dispatch(addBook(book))
     return res.book
 }
