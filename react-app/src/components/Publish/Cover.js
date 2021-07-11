@@ -12,7 +12,7 @@ const Cover = ({form, setForm}) => {
     const [categoryId, setCategoryId] = useState(0)
     const [description, setDescription] = useState('')
     const [title, setTitle] = useState('')
-    const [keywords, setKeywords] = useState([])
+    const [keywords, setKeywords] = useState({kws: []})
     const history = useHistory()
     const me = useSelector(state => state.session.user)
     const book = useSelector(state => state.book)
@@ -76,6 +76,11 @@ const Cover = ({form, setForm}) => {
     file = URL.createObjectURL(file)
     setImage(file)
   }
+
+  const updateKeywords = (e) => {
+      keywords.kws.push(e.target.value)
+    //   setKeywords(...keywords, e.target.value)
+  }
     
     return (
         <div className='add-cover'>
@@ -136,26 +141,26 @@ const Cover = ({form, setForm}) => {
                     <label>Add Keywords</label>
                     <div className='keyword'>
                         <input type='text'
-                        value={keywords}
-                        onChange={(e) => keywords.push(e.target.value)} />
+                        // value={keywords}
+                        onChange={updateKeywords} />
                     </div>
                     <div>
                         <input type='text'
-                        value={keywords}
-                        onChange={(e) => keywords.push(e.target.value)} />
+                        // value={keywords}
+                        onChange={updateKeywords}/>
                     </div>
                     {/* {keywords.length >= 2  && (
                         <div>
                         <input type='text'
                         value={keywords}
-                        onChange={(e) => keywords.push(e.target.value)}  />
+                        onChange={updateKeywords} />
                         </div>
                     )}
                     {keywords.length >= 3 && (
                         <div>
                         <input type='text'
                           value={keywords}
-                            onChange={(e) => keywords.push(e.target.value)}  />
+                            onChange={updateKeywords} />
                         </div>
                     )} */}
                     </div>
