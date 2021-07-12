@@ -12,18 +12,19 @@ const Cover = ({form, setForm}) => {
     const [categoryId, setCategoryId] = useState(0)
     const [description, setDescription] = useState('')
     const [title, setTitle] = useState('')
-    const [keywords, setKeywords] = useState({kws: []})
+    // const [keywords, setKeywords] = useState([])
+    // const [kws, setKws] = useState([])
     const history = useHistory()
     const me = useSelector(state => state.session.user)
     const book = useSelector(state => state.book)
-    console.log(book)
-
+    // console.log(book)
+    // const kws = []
     const dispatch = useDispatch()
 
     const moveOn = (e) => {
         e.preventDefault()
         const tempId = Math.floor(Math.random() * 1000);
-        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, keywords, image}))
+        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, image}))
         const formType = 'page'
         setForm(formType)
     }
@@ -38,7 +39,7 @@ const Cover = ({form, setForm}) => {
             setCover(book.cover)
             setTitle(book.title)
             setCategoryId(book.category_id)
-            setKeywords(book.keywords)
+            // setKeywords(book.keywords)
             setDescription(book.description)
         }
     },[])
@@ -77,10 +78,15 @@ const Cover = ({form, setForm}) => {
     setImage(file)
   }
 
-  const updateKeywords = (e) => {
-      keywords.kws.push(e.target.value)
-    //   setKeywords(...keywords, e.target.value)
-  }
+//   const updateKeywords = (e) => {
+//     setKws(...kws, e.target.value)
+//     //   setKeywords(...kws)
+//   }
+
+//   const enoughKeywords = (e) => {
+//     setKws(...kws, e.target.value)
+//     setKeywords(kws)
+//   }
     
     return (
         <div className='add-cover'>
@@ -137,7 +143,7 @@ const Cover = ({form, setForm}) => {
                             <option value='6'>Biography</option>
                         </select>
                     </div>
-                    <div className='keywords'>
+                    {/* <div className='keywords'>
                     <label>Add Keywords</label>
                     <div className='keyword'>
                         <input type='text'
@@ -147,23 +153,23 @@ const Cover = ({form, setForm}) => {
                     <div>
                         <input type='text'
                         // value={keywords}
-                        onChange={updateKeywords}/>
-                    </div>
+                        onChange={enoughKeywords}/>
+                    </div> */}
                     {/* {keywords.length >= 2  && (
                         <div>
                         <input type='text'
-                        value={keywords}
+                        // value={keywords}
                         onChange={updateKeywords} />
                         </div>
                     )}
                     {keywords.length >= 3 && (
                         <div>
                         <input type='text'
-                          value={keywords}
+                        //   value={keywords}
                             onChange={updateKeywords} />
                         </div>
                     )} */}
-                    </div>
+                    {/* </div> */}
                     <div className='submit-btns'>
                         <button type='submit'>Done! Let's add a page.</button>
                         <button type='button' onClick={cancel}>Cancel</button>

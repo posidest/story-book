@@ -42,7 +42,7 @@ const Publish = () => {
    } else if(publish) {
       return (
          <>
-         <PublishForm/>
+            <PublishForm publish={publish} setPublish={setPublish}/>
          </>
       )
    }

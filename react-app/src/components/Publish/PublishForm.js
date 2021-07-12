@@ -24,10 +24,12 @@ const PublishForm = () => {
             <div className='pages'>
                {pages.map((page) => (
                   <>
-                  page.page_pic ? (
+               {page.page_pic && (
                      <img src={page.page_pic}/>
-                  )
+                  )}
+               {page.page_text && (
                   <p>{page.page_text}</p>
+                  )}
                   </>
                ))}
             </div>
