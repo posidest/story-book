@@ -25,15 +25,15 @@ h3 {
   color: rgb(76, 146, 178);
 }
 
-input[type="file"] {
-  display: none;
-}
-
 input,
 select,
 button {
   padding: 5px;
   margin: 10px;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 textarea {
@@ -46,6 +46,7 @@ form {
   flex-direction: column;
   align-items: center;
   margin: 10px;
+  padding: 20px;
 }
 
 input,
@@ -53,17 +54,34 @@ textarea,
 select {
   background: white;
   border: 0.5px solid rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
+  border-radius: 2px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   width: 200px;
 }
 
-button {
+button,
+a,
+.file-input {
   background: rgb(76, 146, 178);
   color: white;
+  color: rgb(76, 146, 178);
+  background: white;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 0.6px solid rgba(10, 59, 81, 1);
+  border: 0.6px solid rgba(76, 146, 178, 0.5);
   box-shadow: 2px 2px 2px rgba(76, 146, 178, 0.5);
   padding: 6px 10px 6px 10px;
+  text-decoration: none;
+  /* margin: 20px; */
+}
+
+.file-input,
+a {
+  font-size: smaller;
+}
+
+.active a {
+  color: rgb(76, 146, 178);
+  background-color: rgba(10, 59, 81, 1);
 }

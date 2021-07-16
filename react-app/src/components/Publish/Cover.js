@@ -44,33 +44,6 @@ const Cover = ({form, setForm}) => {
         }
     },[])
 
-    // const uploadImage = async (e) => {
-    //     e.preventDefault();
-    //     const formData = new FormData();
-    //     formData.append("intro_img", image);
-    //     setImageLoading(true);
-    //     const res = await fetch('/api/images/intro', {
-    //         method: "POST",
-    //         body: formData,
-    //     });
-
-    //     if (res.ok) {
-    //         const json = await res.json();
-    //         setImageLoading(false);
-    //         await setIntroImg(json.url)
-    //         await setUserId(json.user_id)
-    //     }
-    //     else {
-    //         setImageLoading(false);
-    //         console.log("Something went wrong");
-    //         return (
-    //             <p style={{color: 'red'}}>
-    //                 There was an error with your upload. Please try again.
-    //             </p>
-    //         )
-    //     }
-    // }
-
    const updateImage = (e) => {
     let file = e.target.files[0]
     setCover(file)
@@ -118,6 +91,7 @@ const Cover = ({form, setForm}) => {
                         <input 
                         type='text'
                         name='title'
+                        placeHolder='Title'
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
                         />
@@ -127,7 +101,7 @@ const Cover = ({form, setForm}) => {
                         name='description' 
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder = 'add a description'
+                        placeholder = 'Add a Description'
                         />
                     </div>
                     <div className='category-id'>

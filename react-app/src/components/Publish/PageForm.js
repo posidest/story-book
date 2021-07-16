@@ -66,6 +66,7 @@ const PageForm = ({form, setForm, publish, setPublish}) => {
             }))        
         }
         setPageNumber(pageNumber+1)
+        setAddText(false)
         setPagePic(null)
         setImage(null)
         setPageText('')
@@ -130,22 +131,21 @@ const PageForm = ({form, setForm, publish, setPublish}) => {
         return (
             <div className='page-form-page'>
                 <h1>{`Page ${pageNumber} Image`}</h1>
-                <div className='upload'>
-                    <div className='uploadNav'>
-                        <div className='imageUpload'>  
-                            <p 
-                            onClick={() => setType('image')}>
-                            Upload Photos
-                            </p>
-                        </div>
-                        <div className='embedVideo'>
-                            <p onClick={() => setType('video')}>
-                            Embed a Video
-                            </p>
-                        </div>
-                    </div>
                     <div className='media-form'>
                         <div className='new-media'>
+                            <div className='uploadNav'>
+                                <div className='imageUpload'>  
+                                    <p 
+                                    onClick={() => setType('image')}>
+                                    Upload Photos
+                                    </p>
+                                </div>
+                                <div className='embedVideo'>
+                                    <p onClick={() => setType('video')}>
+                                    Embed a Video
+                                    </p>
+                                </div>
+                            </div>
                             {type === 'image' && (
                             <form>
                                 <div className='upload-photo'>
@@ -207,7 +207,6 @@ const PageForm = ({form, setForm, publish, setPublish}) => {
                         </div>
                     )}
                 </div>
-            </div>
         )
     } else {
         return <h1>...loading</h1>
