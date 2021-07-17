@@ -26,7 +26,7 @@ const postPages = (pages) => ({
 
 
 export const addAPage = (page) => async (dispatch) => {
-  const {temp_id, step_count, step_title, step_imgs, step} = page
+  // const {temp_id, image, page_number, page_pic, page_text} = page
   const res = dispatch(addPage(page))
   // const data = await res.json()
   return res.page;

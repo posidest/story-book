@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {createBook} from '../../store/book';
 import './Publish.css'
 
-const Cover = ({form, setForm}) => {
+const Cover = ({form, setForm, tempId, setTempId}) => {
     const [image, setImage] = useState(null);
     // const [imageLoading, setImageLoading] = useState(false);
     const [cover, setCover] = useState(null)
@@ -23,9 +23,10 @@ const Cover = ({form, setForm}) => {
 
     const moveOn = (e) => {
         e.preventDefault()
-        const tempId = Math.floor(Math.random() * 1000);
-        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, image}))
+        const randomNum = Math.floor(Math.random() * 1000);
+        dispatch(createBook({temp_id: randomNum, cover, user_id: me.id, category_id: categoryId, description, image, title}))
         const formType = 'page'
+        setTempId(randomNum)
         setForm(formType)
     }
 
@@ -43,33 +44,6 @@ const Cover = ({form, setForm}) => {
             setDescription(book.description)
         }
     },[])
-
-    // const uploadImage = async (e) => {
-    //     e.preventDefault();
-    //     const formData = new FormData();
-    //     formData.append("intro_img", image);
-    //     setImageLoading(true);
-    //     const res = await fetch('/api/images/intro', {
-    //         method: "POST",
-    //         body: formData,
-    //     });
-
-    //     if (res.ok) {
-    //         const json = await res.json();
-    //         setImageLoading(false);
-    //         await setIntroImg(json.url)
-    //         await setUserId(json.user_id)
-    //     }
-    //     else {
-    //         setImageLoading(false);
-    //         console.log("Something went wrong");
-    //         return (
-    //             <p style={{color: 'red'}}>
-    //                 There was an error with your upload. Please try again.
-    //             </p>
-    //         )
-    //     }
-    // }
 
    const updateImage = (e) => {
     let file = e.target.files[0]
@@ -92,7 +66,16 @@ const Cover = ({form, setForm}) => {
         <div className='add-cover'>
             <div>
                 <h1>Add A Cover Image</h1>
-                <form onSubmit={moveOn}>
+                <form onSubmit={moveOn} className='cover-form'>
+                    <div className='bookTitle'>
+                        <input 
+                        type='text'
+                        name='title'
+                        placeHolder='Title'
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
+                        />
+                    </div>
                     <div className='upload-photo'>
                         <label className='file-input'>
                         <input
@@ -114,20 +97,12 @@ const Cover = ({form, setForm}) => {
                         )}   
                         </div>
                     </div>
-                    <div className='bookTitle'>
-                        <input 
-                        type='text'
-                        name='title'
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                        />
-                    </div>
-                        <div>
+                    <div className='description-div'>
                     <textarea
                         name='description' 
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder = 'add a description'
+                        placeholder = 'Add a Description'
                         />
                     </div>
                     <div className='category-id'>

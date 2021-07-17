@@ -9,49 +9,64 @@ const Publish = () => {
    const [form, setForm] = useState('book')
    const me = useSelector(state => state.session.user)
    const book = useSelector(state => state.book)
+   // const [publish, setPublish] = useState(false)
+   const [tempId, setTempId] = useState(null)   
    const pages = useSelector(state => state.page.pages)
-   const [publish, setPublish] = useState(false)
+   let display; 
    console.log(book, 'book on publish page')
-   
+   console.log(pages, 'pages from publish page')
+   console.log(book.temp_id, 'tempId of book')
+
    useEffect(() => {
       if(book.temp_id) {
-         setForm('page')
+         // setForm('page')
+         setTempId(book.temp_id)
       }
-   },[form, book, pages])
+   },[book, tempId])
 
 
 
    if(!me) return (
       <Redirect to='/'/>
    )
+
    
    if(form === 'book') {
-      return (
+      display = (
          <>
-         <Cover form={form} setForm={setForm}/>
+         <Cover form={form} setForm={setForm} tempId={tempId} setTempId={setTempId}/>
          </>
       )
    }
-
+   
    else if(form === 'page') {
-      return (
+      display = (
          <>
-            <PageForm form={form} setForm={setForm} setPublish={setPublish}/>
+            <PageForm form={form} setForm={setForm} tempId={tempId}/>
          </>
       )
-   } else if(publish) {
-      return (
+   } 
+
+   else if(form === 'publish') {
+      display = (
          <>
-            <PublishForm publish={publish} setPublish={setPublish}/>
+            <PublishForm form={form} setForm={setForm} tempId={tempId}/>
          </>
       )
    }
    
    else {
-      return (
+      display =  (
          <h1>What is happening?</h1>
       )
    }
+
+
+   return (
+      <>
+      {display}
+      </>
+   )
 }
 
 export default Publish;
