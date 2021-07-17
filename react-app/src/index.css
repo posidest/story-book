@@ -3,6 +3,7 @@
 
 body {
   background: rgba(76, 146, 178, 0.3);
+  margin: 0;
 }
 
 p,
@@ -60,7 +61,6 @@ select {
 }
 
 button,
-a,
 .file-input {
   background: rgb(76, 146, 178);
   color: white;
@@ -76,8 +76,7 @@ a,
   /* margin: 20px; */
 }
 
-.file-input,
-a {
+.file-input {
   font-size: smaller;
 }
 

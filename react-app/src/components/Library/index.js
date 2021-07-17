@@ -14,8 +14,10 @@ const Library = () => {
    return (
       <div className = 'library-page'>
          <h1>Hi {me.username}, Welcome to the Library</h1>
-         <img src={me.avatar} alt='my-avatar'/>
-         <p>{me.bio}</p>
+         <div className='profile'>
+            <img src={me.avatar} alt='my-avatar'/>
+            <p>{me.bio}</p>
+         </div>
          <Link to='/publish'>Publish a Book</Link>
       </div>
    )

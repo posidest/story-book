@@ -1,6 +1,7 @@
 nav {
   display: flex;
   flex-direction: row;
+  margin: 0;
   justify-content: space-around;
   /* padding-top: 10px; */
   /* position: relative; */
@@ -11,10 +12,10 @@ nav {
   align-items: center;
 }
 
-nav .active {
+/* nav .active {
   color: rgb(76, 146, 178);
   background-color: rgba(10, 59, 81, 1);
-}
+} */
 
 nav button {
   position: absolute;
@@ -28,4 +29,9 @@ nav button {
   position: relative;
   height: 40px;
   margin: 0 0 11px 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
 }

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {createBook} from '../../store/book';
 import './Publish.css'
 
-const Cover = ({form, setForm}) => {
+const Cover = ({form, setForm, tempId, setTempId}) => {
     const [image, setImage] = useState(null);
     // const [imageLoading, setImageLoading] = useState(false);
     const [cover, setCover] = useState(null)
@@ -23,9 +23,10 @@ const Cover = ({form, setForm}) => {
 
     const moveOn = (e) => {
         e.preventDefault()
-        const tempId = Math.floor(Math.random() * 1000);
-        dispatch(createBook({temp_id: tempId, cover, user_id: me.id, category_id: categoryId, description, image}))
+        const randomNum = Math.floor(Math.random() * 1000);
+        dispatch(createBook({temp_id: randomNum, cover, user_id: me.id, category_id: categoryId, description, image, title}))
         const formType = 'page'
+        setTempId(randomNum)
         setForm(formType)
     }
 
@@ -65,7 +66,16 @@ const Cover = ({form, setForm}) => {
         <div className='add-cover'>
             <div>
                 <h1>Add A Cover Image</h1>
-                <form onSubmit={moveOn}>
+                <form onSubmit={moveOn} className='cover-form'>
+                    <div className='bookTitle'>
+                        <input 
+                        type='text'
+                        name='title'
+                        placeHolder='Title'
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
+                        />
+                    </div>
                     <div className='upload-photo'>
                         <label className='file-input'>
                         <input
@@ -87,16 +97,7 @@ const Cover = ({form, setForm}) => {
                         )}   
                         </div>
                     </div>
-                    <div className='bookTitle'>
-                        <input 
-                        type='text'
-                        name='title'
-                        placeHolder='Title'
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                        />
-                    </div>
-                        <div>
+                    <div className='description-div'>
                     <textarea
                         name='description' 
                         value={description}
