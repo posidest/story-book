@@ -18,7 +18,10 @@ const removeBook = (book) => ({
   book,
 })
 
-
+const publishBook = (book) => ({
+  type: PUBLISH_BOOK,
+  book
+})
 // export const getBooks = () => async (dispatch) => {
 //   const res = await fetch('/api/books');
 //   const data = await res.json();
@@ -34,27 +37,30 @@ export const createBook = (book) => async (dispatch) => {
 }
 
 
-// export const publishBook = (book) => async (dispatch) => {
-//   const {user_id, title, category_id, keywords, cover, description} = book;
-//    const res = await fetch('/api/books', {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json'},
-//     body: JSON.stringify({
-//       user_id, 
-//       title, 
-//       category_id, 
-//       keywords, 
-//       cover, 
-//       description
-//     })
-//   });
-//   if (res.ok) {
-//     const data = await res.json()
-//     console.log(data, 'data from thunk')
-//     dispatch(addBook(data.book))
-//     console.log(res, 'res from thunk')
-//     return data;
-//   }
+
+
+
+export const postBook = (book) => async (dispatch) => {
+  const {user_id, title, category_id, cover, description} = book;
+   const res = await fetch('/api/books', {
+    method: 'POST',
+    // headers: {'Content-Type': 'application/json'},
+    // body: JSON.stringify({
+    //   user_id, 
+    //   title, 
+    //   category_id, 
+    //   cover, 
+    //   description
+    // })
+    body: multipart/FormData
+  });
+  if (res.ok) {
+    const data = await res.json()
+    // console.log(data, 'data from thunk')
+    dispatch(publishBook(data.book))
+    // console.log(res, 'res from thunk')
+    return data;
+  }
 // }
 
 

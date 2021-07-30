@@ -18,16 +18,14 @@ const PublishForm = (tempId) => {
    const inputClasses = ['titleInput', 'coverInput', 'descriptionInput']
    // const [title, setTitle] = useState(book.book.title)
    // const [title, setTitle] = useState(book.book.title)
+   useEffect(() => {
+      setLeaves(pages)
+   },[pages])
    
    if (!me) return ( 
       <Redirect to='/'/>
       )
       
-   // useEffect(() => {
-   //    if(pages) {
-   //       setLeaves(pages)
-   //    }
-   // },[pages])
 
    const updateTitle = (e) => {
       setTitle(e.target.value)
@@ -42,9 +40,13 @@ const PublishForm = (tempId) => {
       field.classList.remove(hidden) :
       field.classList.add(hidden)
    }
-
+   
+   console.log({...book.book, ...pages}, 'to publish')
+   console.log(leaves, 'leaves')
    const publishBook = (e) => {
-
+      e.preventDefault()
+      // const toPublish = {title, cover: image, description, category: book.book.category, leaves}
+      // dispatch(publishBook({...book.book, ...pages}))
    }
 
    if (pages && book) {
