@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import './Publish.css'
+import {postBook} from '../../store/book'
 
 const PublishForm = (tempId) => {
    const me = useSelector(state => state.session.user)
@@ -47,6 +48,9 @@ const PublishForm = (tempId) => {
       e.preventDefault()
       // const toPublish = {title, cover: image, description, category: book.book.category, leaves}
       // dispatch(publishBook({...book.book, ...pages}))
+      const toPublish = {title, cover: book.book.cover, description, category_id: book.book.category_id, user_id: me.id}
+      const published = dispatch(postBook(toPublish))
+      return published
    }
 
    if (pages && book) {
@@ -64,20 +68,20 @@ const PublishForm = (tempId) => {
                   <button type='button' className='edit-btn' onClick={showField}>edit</button> 
                   <img src={book.book.image} alt='book-cover'/>
                   <h4>{book.book.description}</h4>
-            </div>
-            <div className='pages'>
-               {pages.map((page) => (
-                  <>
-               {page.page_pic && (
-                     <img src={page.image}/>
-                  )}
-               {page.page_text && (
-                  <p>{page.page_text}</p>
-                  )}
-                  </>
-               ))}
-            </div>
-
+               </div>
+               <div className='pages'>
+                  {pages.map((page) => (
+                     <>
+                  {page.page_pic && (
+                        <img src={page.image}/>
+                     )}
+                  {page.page_text && (
+                     <p>{page.page_text}</p>
+                     )}
+                     </>
+                  ))}
+               </div>
+               <button type='submit'>Ready to publish!</button>
             </form>
          </div>
       )
