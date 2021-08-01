@@ -13,6 +13,8 @@ def publish_book():
     form = BookForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        if form.data['user_id'] != current_user.id:
+            return {"errors": "not authorized"}
         if "cover" not in request.files:
             return{"errors": "please upload a cover image"}
         else:
